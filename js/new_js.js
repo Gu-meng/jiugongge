@@ -46,8 +46,8 @@ function start(){
             i++;
     }
     for(var k in IdLi){
-        if(i == 9){l9.innerHTML = "";break;}
-        IdLi[i].innerHTML = img[Num[i] - 1];
+        if(k == 8){l9.innerHTML = "";break;}
+        IdLi[k].innerHTML = img[Num[k] - 1];
     }
     
     clearInterval(int);
