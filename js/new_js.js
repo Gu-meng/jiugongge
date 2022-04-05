@@ -1,6 +1,6 @@
-var minute,second;
-var int;
+var minute,second,int;
 var frequencyNum = 0;
+var IdLi = new Array();
 var img = [
     "<img src=\"img/1.png\">",
     "<img src=\"img/2.png\">",
@@ -10,6 +10,7 @@ var img = [
     "<img src=\"img/6.png\">",
     "<img src=\"img/7.png\">",
     "<img src=\"img/8.png\">",
+    ""
 ];
 
 window.onload = function(){
@@ -21,8 +22,8 @@ window.onload = function(){
     l6 = document.getElementById("l6");
     l7 = document.getElementById("l7");
     l8 = document.getElementById("l8");
-    l9 = document.getElementById("l9");    
-
+    l9 = document.getElementById("l9");  
+    IdLi = [l1,l2,l3,l4,l5,l6,l7,l8,l9]; 
     frequency = document.getElementById("frequency");
 }
 
@@ -44,282 +45,83 @@ function start(){
             Num[i] = shu;
             i++;
     }
-
-    l1.innerHTML = img[Num[0] - 1];
-    l2.innerHTML = img[Num[1] - 1];
-    l3.innerHTML = img[Num[2] - 1];
-    l4.innerHTML = img[Num[3] - 1];
-    l5.innerHTML = img[Num[4] - 1];
-    l6.innerHTML = img[Num[5] - 1];
-    l7.innerHTML = img[Num[6] - 1];
-    l8.innerHTML = img[Num[7] - 1];
-    l9.innerHTML = "";
-
+    for(var k in IdLi){
+        if(i == 9){l9.innerHTML = "";break;}
+        IdLi[i].innerHTML = img[Num[i] - 1];
+    }
+    
     clearInterval(int);
-    int = minute = second = 0;
+    int = minute = second = frequencyNum = 0;
+    frequency.innerHTML = "当前步数 : " + frequencyNum;;
     document.getElementById("time").innerHTML = minute + "分" + second + "秒";
     startTimer();
 }
 
-function test1(){
-    var Text = new TextL1InL9();
-
-    if(Text.l1Text == ""){
-        console.log("空数值无法移动");
-    }else if(Text.l2Text == ""){
-        l2.innerHTML = Text.l1Text;
-        l1.innerHTML = Text.l2Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else if(Text.l4Text == ""){
-        l4.innerHTML = Text.l1Text;
-        l1.innerHTML = Text.l4Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else{
-        console.log("无法移动")
-    }
-
+function test(num){
+    switch(num){
+        case 1 : move([l1,l2,l4]);break;
+        case 2 : move([l2,l1,l3,l5]);break;
+        case 3 : move([l3,l2,l6]);break;
+        case 4 : move([l4,l1,l5,l7]);break;
+        case 5 : move([l5,l2,l4,l6,l8]);break;
+        case 6 : move([l6,l3,l5,l9]);break;
+        case 7 : move([l7,l4,l8]);break;
+        case 8 : move([l8,l5,l7,l9]);break;
+        case 9 : move([l9,l6,l8]);break;
+    }   
     pd();
-}
-
-function test2(){
-    var Text = new TextL1InL9();
-
-    if(Text.l2Text == ""){
-        console.log("空数值无法移动");
-    }else if(Text.l1Text == ""){
-        l1.innerHTML = Text.l2Text;
-        l2.innerHTML = Text.l1Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else if(Text.l3Text == ""){
-        l3.innerHTML = Text.l2Text;
-        l2.innerHTML = Text.l3Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else if(Text.l5Text == ""){
-        l5.innerHTML = Text.l2Text;
-        l2.innerHTML = Text.l5Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else{
-        console.log("无法移动");
-    }
-
-    pd();
-}
-
-function test3(){
-    var Text = new TextL1InL9();
-
-    if(Text.l3Text == ""){
-        console.log("空数值无法移动");
-    }else if(Text.l2Text == ""){
-        l2.innerHTML = Text.l3Text;
-        l3.innerHTML = Text.l2Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else if(Text.l6Text == ""){
-        l6.innerHTML = Text.l3Text;
-        l3.innerHTML = Text.l6Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else{
-        console.log("无法移动")
-    }
-
-    pd();
-}
-
-function test4(){
-    var Text = new TextL1InL9();
-
-    if(Text.l4Text == ""){
-        console.log("空数值无法移动");
-    }else if(Text.l1Text == ""){
-        l1.innerHTML = Text.l4Text;
-        l4.innerHTML = Text.l1Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else if(Text.l5Text == ""){
-        l5.innerHTML = Text.l4Text;
-        l4.innerHTML = Text.l5Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else if(Text.l7Text == ""){
-        l7.innerHTML = Text.l4Text;
-        l4.innerHTML = Text.l7Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else{
-        console.log("无法移动");
-    }
-
-    pd();
-}
-
-function test5(){
-    var Text = new TextL1InL9();
-
-    if(Text.l5Text == ""){
-        console.log("空数值无法移动");
-    }else if(Text.l2Text == ""){
-        l2.innerHTML = Text.l5Text;
-        l5.innerHTML = Text.l2Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else if(Text.l4Text == ""){
-        l4.innerHTML = Text.l5Text;
-        l5.innerHTML = Text.l4Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else if(Text.l6Text == ""){
-        l6.innerHTML = Text.l5Text;
-        l5.innerHTML = Text.l6Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else if(Text.l8Text == ""){
-        l8.innerHTML = Text.l5Text;
-        l5.innerHTML = Text.l8Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else{
-        console.log("无法移动");
-    }
-
-    pd();
-}
-
-function test6(){
-    var Text = new TextL1InL9();
-
-    if(Text.l6Text == ""){
-        console.log("空数值无法移动");
-    }else if(Text.l3Text == ""){
-        l3.innerHTML = Text.l6Text;
-        l6.innerHTML = Text.l3Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else if(Text.l5Text == ""){
-        l5.innerHTML = Text.l6Text;
-        l6.innerHTML = Text.l5Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else if(Text.l9Text == ""){
-        l9.innerHTML = Text.l6Text;
-        l6.innerHTML = Text.l9Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else{
-        console.log("无法移动");
-    }
-
-    pd();
-}
-
-function test7(){
-    var Text = new TextL1InL9();
-
-    if(Text.l7Text == ""){
-        console.log("空数值无法移动");
-    }else if(Text.l4Text == ""){
-        l4.innerHTML = Text.l7Text;
-        l7.innerHTML = Text.l4Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else if(Text.l8Text == ""){
-        l8.innerHTML = Text.l7Text;
-        l7.innerHTML = Text.l8Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else{
-        console.log("无法移动")
-    }
-
-    pd();
-}
-
-function test8(){
-    var Text = new TextL1InL9();
-
-    if(Text.l8Text == ""){
-        console.log("空数值无法移动");
-    }else if(Text.l5Text == ""){
-        l5.innerHTML = Text.l8Text;
-        l8.innerHTML = Text.l5Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else if(Text.l7Text == ""){
-        l7.innerHTML = Text.l8Text;
-        l8.innerHTML = Text.l7Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else if(Text.l9Text == ""){
-        l9.innerHTML = Text.l8Text;
-        l8.innerHTML = Text.l9Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else{
-        console.log("无法移动");
-    }
-
-    pd();
-}
-
-function test9(){
-    var Text = new TextL1InL9();
-
-    if(Text.l9Text == ""){
-        console.log("空数值无法移动");
-    }else if(Text.l6Text == ""){
-        l6.innerHTML = Text.l9Text;
-        l9.innerHTML = Text.l6Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else if(Text.l8Text == ""){
-        l8.innerHTML = Text.l9Text;
-        l9.innerHTML = Text.l8Text;
-        frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
-    }else{
-        console.log("无法移动")
-    }
-
-    pd();
-}
-
-function TextL1InL9(){
-    this.l1Text = l1.innerHTML;
-    this.l2Text = l2.innerHTML;
-    this.l3Text = l3.innerHTML;
-    this.l4Text = l4.innerHTML;
-    this.l5Text = l5.innerHTML;
-    this.l6Text = l6.innerHTML;
-    this.l7Text = l7.innerHTML;
-    this.l8Text = l8.innerHTML;
-    this.l9Text = l9.innerHTML;
 }
 
 function pd(){
-    var Text = new TextL1InL9();
-    if(
-        Text.l1Text == img[0] &&
-        Text.l2Text == img[1] &&
-        Text.l3Text == img[2] &&
-        Text.l4Text == img[3] &&
-        Text.l5Text == img[4] &&
-        Text.l6Text == img[5] &&
-        Text.l7Text == img[6] &&
-        Text.l8Text == img[7] &&
-        Text.l9Text == "" ){
-            alert("You Win");
-            clearInterval(int);
-            document.getElementById("time").innerHTML = "完成时间为" + minute + "分" + second + "秒";
+    for(var t in IdLi){
+        if(IdLi[t].innerHTML != img[t]){
+            return;  
+        }else if(t != 8){
+            continue;
         }
+        alert("You Win");
+        clearInterval(int);
+        document.getElementById("time").innerHTML = "完成时间为" + minute + "分" + second + "秒";
+        break;
+    }
 }
 
 function startTimer(){
-
     int = setInterval(timer,1000);
 }
 
-
 function timer(){ 
-   
     second++;
     if(second >= 60){
         minute += 1;
         second = 0;
     }
-    
     document.getElementById("time").innerHTML = minute + "分" + second + "秒";
 }
 
 function gua(){
-    l1.innerHTML = img[0];
-    l2.innerHTML = img[1];
-    l3.innerHTML = img[2];
-    l4.innerHTML = img[3];
-    l5.innerHTML = img[4];
-    l6.innerHTML = img[5];
-    l7.innerHTML = img[6];
-    l8.innerHTML = img[7];
-    l9.innerHTML = "";
+    for(var j in IdLi){
+        IdLi[j].innerHTML = img[j];
+    }
+}
+
+function swap(li1,li2){
+    var temp =  li1.innerHTML;
+    li1.innerHTML = li2.innerHTML;
+    li2.innerHTML = temp;
+    frequency.innerHTML = "当前步数 : " +  ++frequencyNum;;
+}
+
+function move(li){
+    for(var k in li){
+        if(li[k].innerHTML == ""){
+            if(k == 0){
+                console.log("空数值无法移动");
+            }else{
+                swap(li[k],li[0]);
+            }
+            return;
+        }
+    }
+    console.log("无法移动");
 }
